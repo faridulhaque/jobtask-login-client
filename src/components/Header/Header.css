@@ -1,0 +1,22 @@
+.header{
+    display: flex;
+    margin-right: 1%;
+}
+.login-part{
+    width: 45%;
+}
+.banner-part{
+    width: 54%;
+    
+}
+
+@media only screen and (max-width: 570px) {
+    .banner-part{
+        display: none;
+    }
+    .login-part{
+        width: 90%;
+        margin-left: 5%;
+    }
+  }
+  
