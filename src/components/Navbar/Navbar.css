@@ -1,0 +1,26 @@
+.navbar {
+
+    background-color: white !important;
+
+    box-shadow: 0 2px 2px -1px rgb(207, 206, 206);
+}
+
+
+.navbar-brand {
+    color: rgb(2, 48, 71) !important;
+    font-size: 35px !important;
+
+
+    font-weight: bold !important;
+}
+.btn-secondary {
+    background-color: rgb(2, 48, 71) !important;
+}
+.btn-primary{
+    background-color:rgb(251,133,0) !important;
+    
+}
+.btn-primary, .btn-secondary{
+    border: none !important;
+    border-radius: 0 !important;
+}
