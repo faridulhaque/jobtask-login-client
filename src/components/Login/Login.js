@@ -1,17 +1,21 @@
-import React from "react";
-import './Login.css'
+import React, { useState } from "react";
+import "./Login.css";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const [seePassword, setSeePassword] = useState(false);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    const email = e.target.name.value;
+    const email = e.target.email.value;
     const password = e.target.password.value;
     const data = {
       email,
       password,
     };
+
     if (email) {
-      fetch("http://localhost:5000/login", {
+      fetch("https://fardul-jt-login.herokuapp.com/login", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -22,20 +26,19 @@ const Login = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.token) {
-            console.log("login succed");
+            toast.success(`Login successful`, { id: "success" });
+          } else if (data.error) {
+            toast.error(`${data.error}`, { id: "error" });
           } else {
-            console.log(data.error);
           }
         });
     } else {
-      alert("Error");
+      toast.error("Something wrong!", { id: "something wrong" });
     }
   };
   return (
-    <div className='div-login'
-     
-    >
-      <form  onSubmit={handleSubmit}>
+    <div className="div-login">
+      <form onSubmit={handleSubmit}>
         <h3 style={{ color: "rgb(2, 48, 71)" }} className="text-center">
           Welcome Back
         </h3>
@@ -66,7 +69,7 @@ const Login = () => {
             Password
           </label>
           <input
-            type="password"
+            type={seePassword ? 'text' : 'password'}
             className="form-control w-100"
             id="exampleFormControlInput1"
             placeholder="password"
@@ -74,7 +77,21 @@ const Login = () => {
           />
         </div>
         <div className="d-grid gap-2 mt-4">
-          <button className="btn btn-secondary" type="button">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "-20px",
+              marginBottom: "20px",
+            }}
+          >
+            <small style={{ color: "rgb(2, 48, 71)" }}>
+              <input onChange={()=>setSeePassword(!seePassword)} style={{ marginRight: "2px" }} type="checkbox" />
+              Show Password
+            </small>{" "}
+            <small style={{ color: "rgb(2, 48, 71)" }}>Forgot password? </small>
+          </div>
+          <button className="btn btn-secondary" type="submit">
             Submit
           </button>
         </div>
